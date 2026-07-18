@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>技术简历 — 郑敬耀</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+</head>
+<body class="tech-page">
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">&lt;<span>ZJY</span>/&gt;</a>
+    <button class="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="/">首页</a></li>
+      <li><a href="/tech.html" class="active">技术简历</a></li>
+      <li><a href="/sales.html">销售简历</a></li>
+      <li><a href="/contact.html">联系</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main style="padding-top: var(--nav-height);">
+  <!-- 个人总结 -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; SUMMARY</div>
+        <h2 class="section-title">个人总结</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="card fade-up" id="summary-card">
+        <p style="font-size:1.05rem;line-height:1.9;">加载中...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 教育经历 -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; EDUCATION</div>
+        <h2 class="section-title">教育经历</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="card fade-up" id="edu-card">
+        <div class="timeline" id="edu-timeline"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 专业技能 -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; SKILLS</div>
+        <h2 class="section-title">专业技能</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="card fade-up" id="skills-card"></div>
+    </div>
+  </section>
+
+  <!-- 荣誉奖项 -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; AWARDS</div>
+        <h2 class="section-title">荣誉奖项</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="card-grid card-grid-3 fade-up" id="awards-grid"></div>
+    </div>
+  </section>
+
+  <!-- 社团经历 -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; LEADERSHIP</div>
+        <h2 class="section-title">社团与组织经历</h2>
+        <div class="section-line"></div>
+      </div>
+      <div id="roles-list"></div>
+    </div>
+  </section>
+
+  <!-- 项目经历 -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; PROJECTS</div>
+        <h2 class="section-title">项目经历</h2>
+        <div class="section-line"></div>
+      </div>
+      <div id="projects-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">&copy; 2026 郑敬耀</div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script>
+fetch('/assets/data/tech.json').then(r=>r.json()).then(d=>{
+  document.getElementById('summary-card').innerHTML =
+    '<div class="summary-wrapper">'+
+      '<img src="/个人照片.jpg" alt="郑敬耀" class="profile-photo">'+
+      '<div><p style="font-size:1.05rem;line-height:1.9;">'+d.summary+'</p></div>'+
+    '</div>';
+
+  var edu = d.education;
+  document.getElementById('edu-timeline').innerHTML =
+    '<div class="timeline-item"><div class="timeline-date">'+edu.period+'</div><div class="timeline-title">'+edu.school+'</div><div class="timeline-subtitle">'+edu.major+' &middot; '+edu.degree+'</div></div>'+
+    edu.details.map(function(t){return '<p style="font-size:0.9rem;color:var(--text-secondary);margin-top:8px;">'+t+'</p>';}).join('');
+
+  document.getElementById('skills-card').innerHTML = d.skills.map(function(s){
+    return '<div class="skill-item"><div class="skill-header"><span class="skill-name">'+s.name+'</span><span class="skill-pct">'+s.level+'%</span></div><div class="skill-bar"><div class="skill-fill" data-level="'+s.level+'"></div></div><div class="skill-detail">'+s.detail+'</div></div>';
+  }).join('');
+
+  document.getElementById('awards-grid').innerHTML = d.awards.map(function(a){
+    return '<div class="card stat-card"><div class="stat-number">'+a.count+'</div><div class="stat-label">'+a.title+'</div></div>';
+  }).join('');
+
+  document.getElementById('roles-list').innerHTML = d.roles.map(function(r){
+    return '<div class="card fade-up" style="margin-bottom:20px;"><div class="timeline-title" style="margin-bottom:12px;">'+r.title+'</div><ul class="icon-list">'+r.items.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul></div>';
+  }).join('');
+
+  document.getElementById('projects-list').innerHTML = d.projects.map(function(p){
+    return '<div class="card fade-up" style="margin-bottom:20px;"><div class="timeline-title" style="margin-bottom:4px;">'+p.name+'</div><div class="timeline-date" style="margin-bottom:12px;">'+p.role+'</div><ul class="icon-list">'+p.items.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul></div>';
+  }).join('');
+
+  // 重新触发动画
+  document.querySelectorAll('.fade-up').forEach(function(el){el.classList.add('visible');});
+  document.querySelectorAll('.skill-fill').forEach(function(b){b.style.width=b.dataset.level+'%';});
+});
+</script>
+</body>
+</html>

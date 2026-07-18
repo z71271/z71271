@@ -1,0 +1,28 @@
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 临时文件
+*.log
+*.tmp
+tmp/
+
+# 敏感/个人信息（根据你的实际情况调整）
+/admin/
+个人照片.jpg
+郑敬耀个人简历.docx
+郑敬耀个人简历销售.docx
+assets/data/contact.json
+# ↑ 联系信息里有手机号，如果公开仓库建议忽略掉
+# 或者把敏感信息删掉再上传
+
+# 依赖
+node_modules/
+vendor/

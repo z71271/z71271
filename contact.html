@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系 — 郑敬耀</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">&lt;<span>ZJY</span>/&gt;</a>
+    <button class="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="/">首页</a></li>
+      <li><a href="/tech.html">技术简历</a></li>
+      <li><a href="/sales.html">销售简历</a></li>
+      <li><a href="/contact.html" class="active">联系</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main style="padding-top: var(--nav-height);">
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; CONTACT</div>
+        <h2 class="section-title">联系方式</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="card-grid card-grid-3 fade-up" style="margin-bottom:48px;" id="contact-cards">
+        <div class="card contact-card">
+          <div class="contact-icon">&#9742;</div>
+          <div>
+            <div class="contact-label">电话</div>
+            <div class="contact-value" id="c-phone">加载中...</div>
+          </div>
+        </div>
+        <div class="card contact-card">
+          <div class="contact-icon">&#9993;</div>
+          <div>
+            <div class="contact-label">邮箱</div>
+            <div class="contact-value" id="c-email">加载中...</div>
+          </div>
+        </div>
+        <div class="card contact-card">
+          <div class="contact-icon">&#9872;</div>
+          <div>
+            <div class="contact-label">地址</div>
+            <div class="contact-value" id="c-addr">加载中...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; MESSAGE</div>
+        <h2 class="section-title">给我留言</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="card fade-up" style="max-width:600px;">
+        <form id="contact-form">
+          <div class="form-group">
+            <label class="form-label" for="name">你的名字</label>
+            <input class="form-input" type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">你的邮箱</label>
+            <input class="form-input" type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">留言内容</label>
+            <textarea class="form-textarea" id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-submit">发送留言</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">&copy; 2026 郑敬耀</div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script>
+fetch('/assets/data/contact.json').then(r=>r.json()).then(d=>{
+  document.getElementById('c-phone').textContent = d.phone;
+  document.getElementById('c-email').innerHTML = '<a href="mailto:'+d.email+'">'+d.email+'</a>';
+  document.getElementById('c-addr').textContent = d.address;
+});
+</script>
+</body>
+</html>
