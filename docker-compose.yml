@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    container_name: z71-website
+    ports:
+      - "9999:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
