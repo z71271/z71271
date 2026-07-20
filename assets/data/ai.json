@@ -1,0 +1,130 @@
+{
+  "pageTitle": "AI 能力",
+  "subtitle": "本地AI部署 & 工程化应用",
+  "sections": [
+    {
+      "id": "toolchain",
+      "title": "AI 工具链",
+      "icon": "🔧",
+      "content": {
+        "text": "基于 RTX 3080 搭建了一套完整的本地 AI 开发环境，覆盖模型部署、API 服务化、知识库应用。",
+        "items": [
+          {
+            "name": "Ollama",
+            "description": "本地大语言模型运行环境，支持 qwen2.5、llama3.1、deepseek-r1 等多模型并行部署",
+            "status": "已部署",
+            "link": "https://ollama.com"
+          },
+          {
+            "name": "Open WebUI",
+            "description": "类 ChatGPT 交互界面，Docker 部署，连接本地 Ollama 模型，支持对话历史管理",
+            "status": "已部署",
+            "link": "https://github.com/open-webui/open-webui"
+          },
+          {
+            "name": "DeepSeek API",
+            "description": "通过 API 调用 DeepSeek 大模型，用于 Claude Desktop/Code 的底层推理",
+            "status": "已接入",
+            "link": "https://platform.deepseek.com"
+          },
+          {
+            "name": "OpenClaw",
+            "description": "AI 工具集成平台，部署在本地环境，用于多工具协同调用",
+            "status": "已部署",
+            "link": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "local-deploy",
+      "title": "本地部署方案",
+      "icon": "🖥️",
+      "content": {
+        "text": "在本地 PC（i5-14600KF / 32G RAM / RTX 3080）上搭建了完整的本地 AI 推理环境。",
+        "architecture": {
+          "description": "本地 AI 推理架构",
+          "layers": [
+            {
+              "name": "用户层",
+              "tools": ["Open WebUI（Chat界面）", "Claude Desktop/Code", "自定义 Python 脚本"]
+            },
+            {
+              "name": "API 网关层",
+              "tools": ["Ollama API（localhost:11434）", "DeepSeek API", "自定义 FastAPI 网关（开发中）"]
+            },
+            {
+              "name": "模型推理层",
+              "tools": ["Ollama Runtime", "qwen2.5:7b", "llama3.1:8b", "deepseek-r1:8b"]
+            },
+            {
+              "name": "硬件层",
+              "tools": ["RTX 3080（10GB VRAM）", "i5-14600KF", "32GB DDR5"]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "rag-knowledge",
+      "title": "RAG 知识库",
+      "icon": "📚",
+      "content": {
+        "text": "正在搭建基于本地模型的知识库问答系统。",
+        "plan": [
+          "部署 Dify 社区版（Docker）连接本地 Ollama 模型",
+          "上传个人技术笔记/简历作为知识库",
+          "实现私有知识的智能问答",
+          "为后续面试准备可演示的 RAG Demo"
+        ],
+        "status": "规划中"
+      }
+    },
+    {
+      "id": "skills",
+      "title": "AI 相关技能",
+      "icon": "⚡",
+      "content": {
+        "items": [
+          { "name": "本地模型部署", "level": "熟练" },
+          { "name": "Ollama 模型管理", "level": "熟练" },
+          { "name": "API 调用与集成", "level": "熟练" },
+          { "name": "Docker 容器化部署", "level": "掌握中" },
+          { "name": "FastAPI 后端开发", "level": "学习中" },
+          { "name": "RAG 知识库搭建", "level": "学习中" },
+          { "name": "ComfyUI/Stable Diffusion", "level": "规划中" }
+        ]
+      }
+    },
+    {
+      "id": "projects",
+      "title": "AI 项目",
+      "icon": "🚀",
+      "content": {
+        "items": [
+          {
+            "name": "网站容器化部署",
+            "description": "使用 Dockerfile + docker-compose 将个人网站打包成 Nginx Alpine 镜像",
+            "tech": ["Docker", "Nginx", "docker-compose"],
+            "status": "已完成",
+            "repo": "https://github.com/z71271/z71271"
+          },
+          {
+            "name": "本地 AI API 网关",
+            "description": "用 FastAPI 封装 Ollama 调用，提供统一的模型切换和流式输出接口",
+            "tech": ["Python", "FastAPI", "Ollama", "SSE"],
+            "status": "开发中",
+            "repo": ""
+          },
+          {
+            "name": "Ollama 多模型部署",
+            "description": "在本地 RTX 3080 上部署 qwen2.5、llama3.1、deepseek-r1 三个模型，通过 Open WebUI 统一访问",
+            "tech": ["Ollama", "Open WebUI", "Docker"],
+            "status": "已完成",
+            "repo": ""
+          }
+        ]
+      }
+    }
+  ]
+}

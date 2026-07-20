@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 能力 — 郑敬耀</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <style>
+    /* AI 页面架构层级图 */
+    .arch-layers {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .arch-layer {
+      padding: 16px 20px;
+      border-left: 3px solid var(--accent-tech);
+      background: var(--accent-tech-dim);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .arch-layer .layer-name {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent-tech);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .arch-layer .layer-tools {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* 工具卡片网格 */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .tool-card {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tool-card .tool-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tool-card .tool-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .tool-card .tool-link {
+      font-size: 0.78rem;
+      color: var(--accent-tech);
+      text-decoration: none;
+      font-family: var(--font-mono);
+    }
+    .tool-card .tool-link:hover { text-decoration: underline; }
+
+    /* 状态标签 */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+    }
+    .badge-deployed { background: rgba(0,198,255,0.15); color: var(--accent-tech); }
+    .badge-connected { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .badge-developing { background: rgba(234,179,8,0.15); color: #eab308; }
+    .badge-planning { background: rgba(148,163,184,0.1); color: var(--text-muted); }
+
+    /* AI 技能列表 */
+    .ai-skill-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .ai-skill-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      transition: border-color var(--transition);
+    }
+    .ai-skill-item:hover { border-color: var(--border-glow); }
+    .ai-skill-item .skill-level {
+      font-family: var(--font-mono);
+      color: var(--accent-tech);
+      font-weight: 500;
+      font-size: 0.78rem;
+    }
+
+    /* 项目卡片 */
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .project-card .proj-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .project-card .proj-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .project-card .proj-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .project-card .proj-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .project-card .proj-tech span {
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: var(--accent-tech-dim);
+      color: var(--accent-tech);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+    }
+    .project-card .proj-repo {
+      font-size: 0.82rem;
+      color: var(--accent-tech);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      align-self: flex-start;
+    }
+    .project-card .proj-repo:hover { text-decoration: underline; }
+
+    /* 规划列表 */
+    .plan-list {
+      list-style: none;
+      margin-top: 16px;
+    }
+    .plan-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 10px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    .plan-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-tech);
+      font-size: 0.7rem;
+      top: 2px;
+    }
+
+    .plan-status {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 14px;
+      border-radius: 4px;
+      background: rgba(148,163,184,0.1);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 768px) {
+      .tool-grid,
+      .ai-skill-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">&lt;<span>ZJY</span>/&gt;</a>
+    <button class="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="/">首页</a></li>
+      <li><a href="/tech.html">技术简历</a></li>
+      <li><a href="/ai.html" class="active">AI 能力</a></li>
+      <li><a href="/sales.html">销售简历</a></li>
+      <li><a href="/contact.html">联系</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main style="padding-top: var(--nav-height);">
+  <!-- 页面头部 -->
+  <section class="section" style="padding-bottom: 0;">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; AI_CAPABILITIES</div>
+        <h2 class="section-title" id="page-title">AI 能力</h2>
+        <p style="color:var(--text-muted);font-size:0.9rem;margin-top:4px;" id="page-subtitle">加载中...</p>
+        <div class="section-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 内容区域 -->
+  <div id="sections-container"></div>
+</main>
+
+<footer class="footer">
+  <div class="container">&copy; 2026 郑敬耀</div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script>
+fetch('/assets/data/ai.json').then(r => r.json()).then(d => {
+  document.getElementById('page-title').textContent = d.pageTitle;
+  document.getElementById('page-subtitle').textContent = d.subtitle;
+  renderSections(d.sections);
+  document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+}).catch(err => {
+  document.getElementById('page-subtitle').textContent = '数据加载失败，请稍后重试';
+  console.error('Failed to load ai.json:', err);
+});
+
+function renderSections(sections) {
+  var container = document.getElementById('sections-container');
+  sections.forEach(function(section, i) {
+    var even = i % 2 === 0;
+    var html = '<section class="section" style="padding-top:48px;"><div class="container">' +
+      '<div class="section-header fade-up">' +
+        '<div class="section-tag">&gt; ' + section.id.toUpperCase() + '</div>' +
+        '<h2 class="section-title">' + (section.icon || '') + ' ' + section.title + '</h2>' +
+        '<div class="section-line"></div>' +
+      '</div>' +
+      '<div class="fade-up">' +
+        (section.content.text ? '<p style="color:var(--text-secondary);margin-bottom:12px;font-size:0.92rem;">' + section.content.text + '</p>' : '') +
+        renderContent(section.content) +
+      '</div>' +
+    '</div></section>';
+    container.insertAdjacentHTML('beforeend', html);
+  });
+}
+
+function renderContent(content) {
+  var html = '';
+
+  // 架构层级
+  if (content.architecture) {
+    html += '<div class="arch-layers">';
+    content.architecture.layers.forEach(function(layer) {
+      html += '<div class="arch-layer">' +
+        '<div class="layer-name">' + layer.name + '</div>' +
+        '<div class="layer-tools">' + layer.tools.join(' &nbsp;|&nbsp; ') + '</div>' +
+      '</div>';
+    });
+    html += '</div>';
+  }
+
+  // items 数组 — 根据类型分不同渲染
+  if (content.items && content.items.length > 0) {
+    var first = content.items[0];
+
+    if (first.tech !== undefined) {
+      // 项目卡片
+      html += '<div style="display:flex;flex-direction:column;gap:14px;">';
+      content.items.forEach(function(p) {
+        var tags = (p.tech || []).map(function(t) { return '<span>' + t + '</span>'; }).join('');
+        var repoHtml = p.repo ? '<a href="' + p.repo + '" class="proj-repo" target="_blank" rel="noopener">GitHub →</a>' : '';
+        var badgeClass = p.status === '已完成' ? 'badge-deployed' : p.status === '开发中' ? 'badge-developing' : 'badge-planning';
+        html += '<div class="card project-card">' +
+          '<div class="proj-header">' +
+            '<span class="proj-name">' + p.name + '</span>' +
+            '<span class="badge ' + badgeClass + '">' + p.status + '</span>' +
+          '</div>' +
+          '<div class="proj-desc">' + p.description + '</div>' +
+          '<div class="proj-tech">' + tags + '</div>' +
+          repoHtml +
+        '</div>';
+      });
+      html += '</div>';
+    } else if (first.level !== undefined) {
+      // 技能列表
+      html += '<div class="ai-skill-list">';
+      content.items.forEach(function(s) {
+        html += '<div class="ai-skill-item">' +
+          '<span>' + s.name + '</span>' +
+          '<span class="skill-level">' + s.level + '</span>' +
+        '</div>';
+      });
+      html += '</div>';
+    } else {
+      // 工具卡片
+      html += '<div class="tool-grid">';
+      content.items.forEach(function(tool) {
+        var badgeClass = tool.status === '已部署' ? 'badge-deployed' :
+          tool.status === '已接入' ? 'badge-connected' :
+          tool.status === '开发中' ? 'badge-developing' : 'badge-planning';
+        var linkHtml = tool.link ? '<a href="' + tool.link + '" class="tool-link" target="_blank" rel="noopener">了解更多 →</a>' : '';
+        html += '<div class="card tool-card">' +
+          '<div class="tool-name">' + tool.name + ' <span class="badge ' + badgeClass + '">' + tool.status + '</span></div>' +
+          '<div class="tool-desc">' + tool.description + '</div>' +
+          linkHtml +
+        '</div>';
+      });
+      html += '</div>';
+    }
+  }
+
+  // 计划列表
+  if (content.plan) {
+    html += '<ul class="plan-list">';
+    content.plan.forEach(function(item) {
+      html += '<li>' + item + '</li>';
+    });
+    html += '</ul>';
+    if (content.status) {
+      html += '<span class="plan-status">状态：' + content.status + '</span>';
+    }
+  }
+
+  return html;
+}
+</script>
+</body>
+</html>
