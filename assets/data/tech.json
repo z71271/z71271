@@ -30,6 +30,21 @@
       "name": "Web前端",
       "detail": "HTML5/CSS3响应式页面开发",
       "level": 75
+    },
+    {
+      "name": "AI 本地部署",
+      "detail": "Ollama、Open WebUI、Docker 容器化部署",
+      "level": 70
+    },
+    {
+      "name": "Python 后端",
+      "detail": "FastAPI、REST API 开发（学习中）",
+      "level": 50
+    },
+    {
+      "name": "Docker 容器化",
+      "detail": "Dockerfile、docker-compose 编写与部署",
+      "level": 70
     }
   ],
   "awards": [
