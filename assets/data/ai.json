@@ -8,6 +8,7 @@
       "icon": "🔧",
       "content": {
         "text": "基于 RTX 3080 搭建了一套完整的本地 AI 开发环境，覆盖模型部署、API 服务化、知识库应用。",
+        "mermaid": "graph TB\n    subgraph 用户交互层\n        A[Open WebUI<br/>Chat界面]\n        B[Python 脚本<br/>编程调用]\n        C[AnythingLLM<br/>RAG知识库]\n    end\n    subgraph API网关层\n        D[Ollama API<br/>:11434/v1/chat]\n    end\n    subgraph 模型推理层\n        E[Ollama Runtime<br/>CUDA加速]\n        F[qwen2.5:7b]\n        G[llama3.1:8b]\n        H[deepseek-r1:8b]\n    end\n    subgraph 硬件层\n        I[RTX 3080 10GB<br/>i5-14600KF 32GB]\n    end\n    A --> D\n    B --> D\n    C --> D\n    D --> E\n    E --> F\n    E --> G\n    E --> H\n    style A fill:#0f1525,stroke:#00d4ff,color:#eaeaea\n    style B fill:#0f1525,stroke:#00d4ff,color:#eaeaea\n    style C fill:#0f1525,stroke:#00d4ff,color:#eaeaea\n    style D fill:#0f1525,stroke:#a78bfa,color:#eaeaea\n    style E fill:#0f1525,stroke:#00ff64,color:#eaeaea\n    style F fill:#0f1525,stroke:#ffc800,color:#eaeaea\n    style G fill:#0f1525,stroke:#ffc800,color:#eaeaea\n    style H fill:#0f1525,stroke:#ffc800,color:#eaeaea\n    style I fill:#0f1525,stroke:#888,color:#eaeaea",
         "items": [
           {
             "name": "Ollama",
@@ -70,14 +71,14 @@
       "title": "RAG 知识库",
       "icon": "📚",
       "content": {
-        "text": "正在搭建基于本地模型的知识库问答系统。",
+        "text": "已使用 AnythingLLM 搭建本地 RAG 知识库，上传技术文档后可实现基于私有知识的智能问答。",
         "plan": [
-          "部署 Dify 社区版（Docker）连接本地 Ollama 模型",
-          "上传个人技术笔记/简历作为知识库",
-          "实现私有知识的智能问答",
-          "为后续面试准备可演示的 RAG Demo"
+          "✅ 部署 AnythingLLM 桌面版（连接 Ollama）",
+          "✅ 上传个人技术笔记/简历作为知识库",
+          "✅ RAG 问答测试全通过（5个问题零幻觉）",
+          "🔲 部署 Dify 社区版进行功能对比（Docker Hub 镜像源受限，暂时搁置）"
         ],
-        "status": "规划中"
+        "status": "已完成核心功能"
       }
     },
     {
@@ -91,7 +92,7 @@
           { "name": "API 调用与集成", "level": "熟练" },
           { "name": "Docker 容器化部署", "level": "掌握中" },
           { "name": "FastAPI 后端开发", "level": "学习中" },
-          { "name": "RAG 知识库搭建", "level": "学习中" },
+          { "name": "RAG 知识库搭建", "level": "掌握" },
           { "name": "ComfyUI/Stable Diffusion", "level": "规划中" }
         ]
       }

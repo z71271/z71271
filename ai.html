@@ -6,6 +6,7 @@
   <title>AI 能力 | ZJY</title>
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
     /* ===== AI页面专属样式 ===== */
     .ai-container {
@@ -221,6 +222,33 @@
     }
 
     /* 响应式 */
+    /* Mermaid 架构图 */
+    .mermaid-wrapper {
+      margin: 20px 0;
+      padding: 20px;
+      background: #0a0e17;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    .mermaid-wrapper .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* 深色主题下的 mermaid 适配 */
+    .mermaid-wrapper .mermaid svg text {
+      fill: #ccc !important;
+    }
+
+    @media (max-width: 768px) {
+      .mermaid-wrapper {
+        padding: 12px 8px;
+      }
+    }
+
+    /* 响应式 */
     @media (max-width: 768px) {
       .tool-grid { grid-template-columns: 1fr; }
       .skill-list { grid-template-columns: 1fr; }
@@ -278,6 +306,12 @@
         renderSections(data.sections);
         document.getElementById('loading').style.display = 'none';
         document.getElementById('ai-content').style.display = 'block';
+        // 初始化 Mermaid
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'dark'
+        });
+        mermaid.run();
       })
       .catch(err => {
         document.getElementById('loading').innerHTML = '<p style="color:#ff5555;">数据加载失败，请稍后重试</p>';
@@ -369,6 +403,11 @@
           html += `<li>${item}</li>`;
         });
         html += '</ul>';
+      }
+
+      // Mermaid 架构图
+      if (content.mermaid) {
+        html += '<div class="mermaid-wrapper"><pre class="mermaid">' + content.mermaid + '</pre></div>';
       }
 
       return html;
