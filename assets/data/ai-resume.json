@@ -1,0 +1,149 @@
+{
+  "summary": "计算机网络应用专科应届生，在AI应用开发与本地部署方向上具备实际动手经验。独立完成 RTX 3080 本地推理环境搭建，部署 qwen2.5、llama3.1、deepseek-r1 三模型并提供 OpenAI 兼容 API；用 Dockerfile + docker-compose 将个人网站容器化部署至阿里云；搭建 AnythingLLM 本地 RAG 知识库实现私有文档问答。核心技术栈：Ollama、Docker、FastAPI、Python、RAG。目标是AI应用开发与部署方向，具备从模型部署到 API 集成到知识库应用的全链条实操能力。",
+  "education": [
+    {
+      "school": "广州市公用事业技师学院",
+      "major": "计算机网络应用",
+      "degree": "专科",
+      "period": "2022-09 - 2026-07",
+      "note": "核心课程：中型网络管理与维护、信创操作系统配置、Linux服务器运维、Web前端开发。课程成绩90分以上占比90%，两门核心专业课满分，专业排名前5%。自学AI相关知识，在毕业设计中整合本地大模型部署方案。"
+    }
+  ],
+  "experience": [
+    {
+      "company": "个人AI开发项目",
+      "role": "独立开发者",
+      "items": [
+        "本地部署3个7B级大语言模型（qwen2.5、llama3.1、deepseek-r1），基于Ollama搭建推理服务并提供OpenAI兼容API",
+        "部署Open WebUI构建类ChatGPT交互界面，实现多模型切换与对话历史管理",
+        "搭建AnythingLLM私有RAG知识库，上传技术笔记与简历作为知识来源，经过5题测试回答准确率达到100%无幻觉",
+        "编写Python脚本封装多模型调用接口，支持流式输出（SSE），实现中文/英文/推理场景自动切换模型"
+      ]
+    },
+    {
+      "company": "个人网站全栈项目",
+      "role": "开发者 + 运维",
+      "items": [
+        "从零搭建个人展示网站（z71.z71.pw），包含首页、技术简历、AI能力、笔记系统等7个子页面，暗色主题风格",
+        "编写Dockerfile（nginx:alpine基础镜像，35MB）实现网站容器化打包，docker-compose编排一键部署",
+        "部署至阿里云 2C2G 服务器，通过Nginx反向代理对外提供服务，配置SSL证书",
+        "搭建GitHub Actions自动构建 + SCP远程部署流水线（开发中）"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "本地AI工具链搭建",
+      "role": "完整架构",
+      "items": [
+        "模型层：Ollama（RTX 3080，10GB VRAM）部署 qwen2.5:7b / llama3.1:8b / deepseek-r1:8b",
+        "界面层：Open WebUI 类ChatGPT界面，浏览器端直接访问",
+        "RAG层：AnythingLLM + LanceDB向量数据库，支持私有文档智能问答",
+        "业务层：Python脚本封装OpenAI SDK调用，支持流式输出与多模型切换",
+        "全部基于本地硬件，不依赖云端API，断网可用"
+      ]
+    },
+    {
+      "name": "个人网站容器化与部署",
+      "role": "Docker + Nginx",
+      "items": [
+        "编写Dockerfile（nginx:alpine），镜像体积仅35MB",
+        "docker-compose编排：80端口映射 + 数据卷持久化，一键启动",
+        "踩坑：Docker Hub国内不可达（配镜像源）、docker-compose vs docker compose兼容性、containerd shim版本冲突"
+      ]
+    },
+    {
+      "name": "RAG私有知识库系统",
+      "role": "搭建 + 测试",
+      "items": [
+        "选型对比：Dify（资源重）、MaxKB（社区小）、FastGPT（部署复杂）→ 最终选AnythingLLM桌面版",
+        "10分钟完成部署：下载→安装→Ollama连接→qwen2.5:7b→内置Embedding→LanceDB→拖文档上传",
+        "上传技术清单/Docker笔记/Ollama笔记/简历信息，5题测试全对无幻觉",
+        "面试场景可现场演示：上传随机文档 → AI即时基于该文档回答问题"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "本地AI部署",
+      "detail": "Ollama模型管理、Open WebUI界面部署、模型选型与显存管理、OpenAI兼容API配置",
+      "story": "• 在个人PC（RTX 3080 / 10GB显存）上成功部署3个7B级大模型（qwen2.5、llama3.1、deepseek-r1）\n• 搭建Open WebUI为日常使用界面，提供类ChatGPT交互体验\n• 对外开放OpenAI兼容API（localhost:11434/v1），Python可直接调用\n• 配置局域网访问，手机/平板均可使用本地AI服务"
+    },
+    {
+      "name": "Docker容器化",
+      "detail": "Dockerfile编写、docker-compose编排、Nginx反向代理、镜像优化（alpine，35MB）",
+      "story": "• 独立编写Dockerfile将个人网站打包为容器镜像，选nginx:alpine基础镜像将体积从140MB压缩至约35MB\n• 编写docker-compose.yml实现一键部署（端口映射+数据卷持久化）\n• 踩过并解决3个生产级问题：Docker Hub国内不可达、compose版本兼容性、containerd shim冲突\n• 网站当前运行在阿里云Docker容器中"
+    },
+    {
+      "name": "Python后端",
+      "detail": "FastAPI框架、OpenAI SDK调用、流式输出/SSE、多模型切换封装",
+      "story": "• 基于OpenAI SDK封装Ollama调用，实现流式输出（打字机效果，用户体验优于空白等待）\n• 封装多模型自动切换：中文问答→qwen2.5 / 英文对话→llama3.1 / 复杂推理→deepseek-r1\n• 正在用FastAPI将逻辑包装为REST API，支持前端和WebUI统一调用"
+    },
+    {
+      "name": "RAG知识库",
+      "detail": "AnythingLLM部署、LanceDB向量数据库、文档切块/嵌入/检索全流程理解",
+      "story": "• 10分钟完成AnythingLLM本地部署（Ollama + 内置Embedding + LanceDB向量数据库）\n• 上传技术清单、Docker笔记、简历等私有文档构建个人知识库\n• 5题问答测试全部正确、零幻觉：「会什么技术」「用了哪些AI模型」「服务器配置」等均精准回答\n• 可现场演示：拖入任意文档→AI即刻基于该文档准确回答问题"
+    },
+    {
+      "name": "Web前端",
+      "detail": "HTML5/CSS3/JS响应式开发、暗色主题设计、单页面应用（SPA）渲染",
+      "story": "• 从零搭建个人展示网站（z71.z71.pw），含首页+5个子页面+笔记系统共7个页面\n• 全站暗色主题、响应式适配手机端、CSS变量统一配色体系\n• 笔记页面用marked.js解析Markdown，支持代码高亮、表格、引用块渲染\n• 首页打CS动效、GitHub SVG图标、胶囊按钮等细节打磨"
+    },
+    {
+      "name": "Linux运维",
+      "detail": "阿里云Ubuntu服务器、Nginx配置与日志查看、SSH远程管理、SSL证书部署",
+      "story": "• 独立完成阿里云ECS（2C2G Ubuntu）从零配置到网站上线全流程\n• 配置Nginx反向代理、查看access/error日志排查问题\n• 用acme.sh申请免费SSL证书实现HTTPS访问\n• 编写systemd service实现Docker容器开机自启\n• 全站运维由个人独立负责：域名→DNS→服务器→部署→监控"
+    },
+    {
+      "name": "网络技术",
+      "detail": "华为eNSP路由交换（静态路由、RIP、OSPF、BGP）、VLAN划分、IP规划",
+      "story": "• 华为eNSP搭建多区域网络拓扑，配置OSPF/BGP/静态路由协议\n• 掌握VLAN隔离+Trunk配置、IP子网规划与掩码计算\n• 专业课程90分以上占比超90%、两门核心专业课满分\n• 理解云网络与Docker网络底层原理（容器间通信=二层互联）"
+    }
+  ],
+  "awards": [
+    {
+      "title": "技术类一等学业奖学金",
+      "count": "5学期"
+    },
+    {
+      "title": "AI本地部署实操经验",
+      "count": "3模型"
+    },
+    {
+      "title": "网站全栈项目",
+      "count": "7页面"
+    },
+    {
+      "title": "Docker容器化项目",
+      "count": "2个"
+    },
+    {
+      "title": "专业排名",
+      "count": "前5%"
+    }
+  ],
+  "roles": [
+    {
+      "title": "计算机服务社 | 社长",
+      "items": [
+        "搭建12人技术服务团队，策划校园电脑维修、AI办公技能普及活动",
+        "面向全校师生开展AI工具使用宣讲（ChatGPT/DeepSeek/Ollama本地部署入门）",
+        "协调团队分工、活动复盘，锻炼技术讲解与领导力"
+      ]
+    },
+    {
+      "title": "班级 | 班长",
+      "items": [
+        "统筹班级日常管理，充当师生沟通核心纽带",
+        "两次获评「优秀学生干部」"
+      ]
+    },
+    {
+      "title": "「银智课堂」志愿服务项目 | 负责人",
+      "items": [
+        "独立主导公益技术科普项目，面向社会群众开展网络、电脑基础教学，累计覆盖4000+人次",
+        "项目获《广州日报》媒体报道"
+      ]
+    }
+  ]
+}

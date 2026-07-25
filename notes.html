@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>技术笔记 | ZJY</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    .notes-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .notes-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .notes-header h1 {
+      font-size: 2em;
+      color: #00d4ff;
+      margin-bottom: 8px;
+    }
+
+    .notes-header .subtitle {
+      color: #888;
+      font-size: 0.85em;
+      letter-spacing: 1px;
+    }
+
+    /* 笔记列表 */
+    .notes-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .notes-list li {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .notes-list li:hover {
+      background: rgba(0, 212, 255, 0.02);
+      padding-left: 12px;
+      margin-left: -12px;
+      border-radius: 4px;
+    }
+
+    .notes-list a {
+      color: #eaeaea;
+      text-decoration: none;
+      font-size: 1.05em;
+      font-weight: 500;
+    }
+
+    .notes-list a:hover {
+      color: #00d4ff;
+    }
+
+    .notes-list .note-date {
+      color: #666;
+      font-size: 0.75em;
+      white-space: nowrap;
+    }
+
+    .notes-list .note-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .notes-list .note-tag {
+      padding: 2px 8px;
+      border-radius: 3px;
+      background: rgba(0, 212, 255, 0.1);
+      color: #00d4ff;
+      font-size: 0.7em;
+    }
+
+    /* 单篇笔记渲染样式 */
+    .note-article {
+      line-height: 1.85;
+      color: #ccc;
+    }
+
+    .note-article h1 {
+      color: #00d4ff;
+      font-size: 1.8em;
+      margin-bottom: 12px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+    }
+
+    .note-article h2 {
+      color: #00d4ff;
+      font-size: 1.3em;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.12);
+    }
+
+    .note-article h3 {
+      color: #d4d4d4;
+      font-size: 1.05em;
+      margin-top: 26px;
+      margin-bottom: 10px;
+    }
+
+    .note-article p {
+      margin-bottom: 16px;
+    }
+
+    .note-article ul, .note-article ol {
+      margin-bottom: 16px;
+      padding-left: 26px;
+    }
+
+    .note-article li {
+      margin-bottom: 6px;
+    }
+
+    .note-article blockquote {
+      border-left: 3px solid #00d4ff;
+      margin: 20px 0;
+      padding: 12px 20px;
+      background: rgba(0, 212, 255, 0.05);
+      color: #aaa;
+      font-style: italic;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .note-article code {
+      background: #1a1a2e;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      color: #ffc800;
+    }
+
+    .note-article pre {
+      background: #1a1a2e;
+      padding: 18px 20px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 16px 0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .note-article pre code {
+      background: none;
+      padding: 0;
+      color: #eaeaea;
+      font-size: 0.8em;
+    }
+
+    .note-article table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.85em;
+    }
+
+    .note-article th {
+      background: rgba(0, 212, 255, 0.1);
+      color: #00d4ff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .note-article td {
+      padding: 8px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: #bbb;
+    }
+
+    .note-article hr {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin: 32px 0;
+    }
+
+    .note-article strong {
+      color: #eaeaea;
+    }
+
+    .note-article em {
+      color: #aaa;
+    }
+
+    .note-article img {
+      max-width: 100%;
+      border-radius: 6px;
+    }
+
+    .note-article a {
+      color: #00d4ff;
+      text-decoration: none;
+    }
+
+    .note-article a:hover {
+      text-decoration: underline;
+    }
+
+    /* 返回按钮 */
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #00d4ff;
+      text-decoration: none;
+      font-size: 0.85em;
+      padding: 6px 16px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: rgba(0, 212, 255, 0.1);
+    }
+
+    /* 加载中 */
+    .loading {
+      text-align: center;
+      padding: 60px 0;
+      color: #888;
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .notes-container { padding: 20px 15px; }
+      .notes-header h1 { font-size: 1.5em; }
+      .note-article h1 { font-size: 1.4em; }
+      .note-article h2 { font-size: 1.15em; }
+      .note-article pre { padding: 12px; font-size: 0.75em; }
+      .notes-list li { padding: 14px 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏（与全站统一） -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">&lt;<span>ZJY</span>/&gt;</a>
+      <button class="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="/">首页</a></li>
+        <li><a href="/tech.html">技术简历</a></li>
+        <li><a href="/ai.html">AI 能力</a></li>
+        <li><a href="/notes.html" class="active">笔记</a></li>
+        <li><a href="/ai-resume.html">AI简历</a></li>
+        <li><a href="/sales.html">销售简历</a></li>
+        <li><a href="/contact.html">联系</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main style="padding-top: var(--nav-height);">
+    <div id="notes-content" class="notes-container"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      &copy; 2026 郑敬耀 &mdash; Built with <a href="/admin/login.html">◆</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // 配置：笔记元数据（新增笔记只需在这里加一条）
+    const notesMeta = [
+      {
+        file: 'dockerfile-guide.md',
+        title: 'Dockerfile 学习笔记',
+        date: '2026-07',
+        tags: ['Docker', '运维'],
+        desc: '从 docker run 到 docker build — 学会写 Dockerfile 的 7 个核心指令'
+      },
+      {
+        file: 'ollama-deploy.md',
+        title: 'Ollama 本地大模型部署笔记',
+        date: '2026-07',
+        tags: ['AI', 'Ollama'],
+        desc: '在 RTX 3080 上部署 qwen2.5、llama3.1、deepseek-r1 三模型的完整记录'
+      },
+      {
+        file: 'rag-deploy.md',
+        title: 'RAG 知识库部署笔记',
+        date: '2026-07',
+        tags: ['AI', 'RAG'],
+        desc: '用 AnythingLLM 搭建本地 RAG 知识库，让 AI 基于私有文档回答问题'
+      },
+      {
+        file: 'ai-toolchain.md',
+        title: '我的 AI 工具链总结',
+        date: '2026-07',
+        tags: ['AI', '架构'],
+        desc: 'Ollama + Open WebUI + AnythingLLM + Python 脚本 — 完整的本地 AI 工具链梳理'
+      }
+    ];
+
+    // 读取 URL 参数
+    const params = new URLSearchParams(window.location.search);
+    const postFile = params.get('post');
+
+    if (postFile) {
+      renderPost(postFile);
+    } else {
+      renderList();
+    }
+
+    function renderList() {
+      let html = `
+        <div class="notes-header">
+          <h1>技术笔记</h1>
+          <p class="subtitle">学习过程的记录与思考 — 全部基于实操</p>
+        </div>
+        <ul class="notes-list">
+      `;
+
+      notesMeta.forEach(note => {
+        const tagsHtml = note.tags.map(t =>
+          `<span class="note-tag">${t}</span>`
+        ).join('');
+
+        html += `
+          <li>
+            <div>
+              <a href="?post=${note.file}">${note.title}</a>
+              <p style="color:#888;font-size:0.8em;margin-top:4px;">${note.desc}</p>
+              <div class="note-tags" style="margin-top:6px;">${tagsHtml}</div>
+            </div>
+            <span class="note-date">${note.date}</span>
+          </li>
+        `;
+      });
+
+      html += '</ul>';
+      document.getElementById('notes-content').innerHTML = html;
+    }
+
+    function renderPost(file) {
+      // 找到当前笔记元数据，更新页面标题
+      const note = notesMeta.find(n => n.file === file);
+      if (note) {
+        document.title = `${note.title} | ZJY`;
+      }
+
+      // 显示加载中
+      document.getElementById('notes-content').innerHTML =
+        '<div class="loading" style="padding:100px 0;">加载笔记中<span class="dot-anim">...</span></div>';
+
+      fetch(`notes/${file}`)
+        .then(res => {
+          if (!res.ok) throw new Error('笔记不存在');
+          return res.text();
+        })
+        .then(md => {
+          const html = `
+            <a href="notes.html" class="back-btn">← 返回笔记列表</a>
+            <div class="note-article">${marked.parse(md)}</div>
+          `;
+          document.getElementById('notes-content').innerHTML = html;
+
+          // 给代码块添加语言标签
+          document.querySelectorAll('pre code').forEach(block => {
+            const lang = block.className || '';
+            const pre = block.parentElement;
+            if (lang && pre) {
+              pre.setAttribute('data-lang', lang.replace('language-', ''));
+            }
+          });
+        })
+        .catch(err => {
+          document.getElementById('notes-content').innerHTML = `
+            <a href="notes.html" class="back-btn">← 返回笔记列表</a>
+            <div style="text-align:center;padding:80px 0;">
+              <p style="color:#ff5555;font-size:1.1em;">笔记加载失败：${err.message}</p>
+              <p style="color:#888;margin-top:12px;">这篇笔记可能还在写作中...</p>
+            </div>
+          `;
+        });
+    }
+  </script>
+</body>
+</html>

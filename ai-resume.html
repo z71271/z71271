@@ -3,11 +3,112 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>销售简历 — 郑敬耀</title>
+  <title>AI应用简历 — 郑敬耀</title>
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <style>
+    /* ===== 技能面试话术弹层 ===== */
+    .skill-item.interview {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .skill-item.interview .skill-pct {
+      color: #00d4ff;
+      transition: color 0.2s;
+    }
+
+    .skill-item.interview:hover .skill-pct {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* 提示小标识 */
+    .skill-item.interview .skill-name::after {
+      content: ' ⓘ';
+      font-size: 0.7em;
+      color: rgba(0,212,255,0.45);
+      vertical-align: super;
+    }
+
+    /* ===== 弹出层（桌面 hover） ===== */
+    .skill-tooltip {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: #0f1525;
+      border: 1px solid rgba(0,212,255,0.3);
+      border-radius: 8px;
+      padding: 16px 18px;
+      font-size: 0.82em;
+      line-height: 1.75;
+      color: #bbb;
+      z-index: 100;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.55), 0 0 16px rgba(0,212,255,0.08);
+      pointer-events: none;
+      min-width: 340px;
+    }
+
+    .skill-tooltip .tooltip-title {
+      color: #00d4ff;
+      font-weight: 600;
+      font-size: 0.92em;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(0,212,255,0.12);
+    }
+
+    /* hover 时展现 */
+    .skill-item.interview:hover .skill-tooltip {
+      display: block;
+    }
+
+    /* 让弹出层在最外层卡片里可见（处理 overflow 裁剪） */
+    .skill-item.interview:hover {
+      z-index: 101;
+      overflow: visible;
+    }
+
+    /* ===== 手机端：点击展开 ===== */
+    @media (max-width: 768px) {
+      .skill-item.interview .skill-name::after {
+        content: ' ▸';
+        font-size: 0.65em;
+        color: rgba(0,212,255,0.5);
+      }
+
+      .skill-item.interview.active .skill-name::after {
+        content: ' ▾';
+      }
+
+      /* 手机端禁用 hover，改为点击 */
+      .skill-item.interview:hover .skill-tooltip {
+        display: none;
+      }
+
+      .skill-item.interview.active .skill-tooltip {
+        display: block;
+      }
+
+      .skill-tooltip {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        min-width: 0;
+        width: 100%;
+        margin-top: 12px;
+        border-radius: 6px;
+        padding: 14px 16px;
+        font-size: 0.83em;
+        box-shadow: inset 0 0 0 1px rgba(0,212,255,0.15);
+      }
+    }
+  </style>
 </head>
-<body class="sales-page">
+<body class="tech-page">
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-brand">&lt;<span>ZJY</span>/&gt;</a>
@@ -17,8 +118,8 @@
       <li><a href="/tech.html">技术简历</a></li>
       <li><a href="/ai.html">AI 能力</a></li>
       <li><a href="/notes.html">笔记</a></li>
-      <li><a href="/ai-resume.html">AI简历</a></li>
-      <li><a href="/sales.html" class="active">销售简历</a></li>
+      <li><a href="/ai-resume.html" class="active">AI简历</a></li>
+      <li><a href="/sales.html">销售简历</a></li>
       <li><a href="/contact.html">联系</a></li>
     </ul>
   </div>
@@ -53,15 +154,27 @@
     </div>
   </section>
 
-  <!-- 工作经历 -->
+  <!-- AI项目经验（替代传统工作经历） -->
   <section class="section" style="padding-top:0;">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-tag">&gt; EXPERIENCE</div>
-        <h2 class="section-title">工作经历</h2>
+        <div class="section-tag">&gt; PROJECTS</div>
+        <h2 class="section-title">AI 项目经验</h2>
         <div class="section-line"></div>
       </div>
       <div id="exp-list"></div>
+    </div>
+  </section>
+
+  <!-- 实战项目 -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">&gt; PORTFOLIO</div>
+        <h2 class="section-title">实战作品</h2>
+        <div class="section-line"></div>
+      </div>
+      <div id="projects-list"></div>
     </div>
   </section>
 
@@ -70,19 +183,19 @@
     <div class="container">
       <div class="section-header fade-up">
         <div class="section-tag">&gt; SKILLS</div>
-        <h2 class="section-title">核心技能</h2>
+        <h2 class="section-title">AI 相关技能</h2>
         <div class="section-line"></div>
       </div>
-      <div class="card-grid card-grid-2" id="skills-grid"></div>
+      <div id="skills-card"></div>
     </div>
   </section>
 
-  <!-- 荣誉奖项 -->
+  <!-- 荣誉与亮点 -->
   <section class="section" style="padding-top:0;">
     <div class="container">
       <div class="section-header fade-up">
         <div class="section-tag">&gt; AWARDS</div>
-        <h2 class="section-title">荣誉奖项</h2>
+        <h2 class="section-title">荣誉与亮点</h2>
         <div class="section-line"></div>
       </div>
       <div class="card-grid card-grid-3 fade-up" id="awards-grid"></div>
@@ -108,7 +221,7 @@
 
 <script src="/assets/js/main.js"></script>
 <script>
-fetch('/assets/data/sales.json').then(r=>r.json()).then(d=>{
+fetch('/assets/data/ai-resume.json').then(r=>r.json()).then(d=>{
   document.getElementById('summary-card').innerHTML =
     '<div class="summary-wrapper">'+
       '<img src="/个人照片.jpg" alt="郑敬耀" class="profile-photo">'+
@@ -123,9 +236,32 @@ fetch('/assets/data/sales.json').then(r=>r.json()).then(d=>{
     return '<div class="card fade-up" style="margin-bottom:20px;"><div class="timeline-title">'+ex.company+'</div><div class="timeline-subtitle" style="margin-bottom:10px;">'+ex.role+'</div><ul class="icon-list">'+ex.items.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul></div>';
   }).join('');
 
-  document.getElementById('skills-grid').innerHTML = d.skills.map(function(s){
-    return '<div class="card fade-up"><div style="font-weight:600;margin-bottom:6px;">'+s.name+'</div><div style="font-size:0.88rem;color:var(--text-secondary);">'+s.detail+'</div></div>';
+  document.getElementById('projects-list').innerHTML = d.projects.map(function(p){
+    return '<div class="card fade-up" style="margin-bottom:20px;"><div class="timeline-title" style="margin-bottom:4px;">'+p.name+'</div><div class="timeline-date" style="margin-bottom:12px;">'+p.role+'</div><ul class="icon-list">'+p.items.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul></div>';
   }).join('');
+
+  document.getElementById('skills-card').innerHTML = d.skills.map(function(s, idx){
+    var storyHtml = s.story ?
+      '<div class="skill-tooltip" id="tooltip-'+idx+'"><div class="tooltip-title">📋 '+s.name+' — 我做了什么</div>'+s.story.replace(/\n/g,'<br>')+'</div>' : '';
+    return '<div class="skill-item interview" data-tooltip="tooltip-'+idx+'"><div class="skill-header"><span class="skill-name">'+s.name+'</span><span class="skill-pct">'+s.detail+'</span></div>'+storyHtml+'</div>';
+  }).join('');
+
+  // 手机端：点击技能项展开/收起实操详情
+  document.querySelectorAll('.skill-item.interview').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      // 如果点击的是已展开的项，收起
+      if (el.classList.contains('active')) {
+        el.classList.remove('active');
+        return;
+      }
+      // 关闭其他展开项
+      document.querySelectorAll('.skill-item.interview.active').forEach(function(other) {
+        other.classList.remove('active');
+      });
+      // 展开当前
+      el.classList.add('active');
+    });
+  });
 
   document.getElementById('awards-grid').innerHTML = d.awards.map(function(a){
     return '<div class="card stat-card"><div class="stat-number">'+a.count+'</div><div class="stat-label">'+a.title+'</div></div>';
