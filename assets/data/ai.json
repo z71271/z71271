@@ -112,10 +112,10 @@
           },
           {
             "name": "本地 AI API 网关",
-            "description": "用 FastAPI 封装 Ollama 调用，提供统一的模型切换和流式输出接口",
-            "tech": ["Python", "FastAPI", "Ollama", "SSE"],
-            "status": "开发中",
-            "repo": ""
+            "description": "用 FastAPI 封装 Ollama 调用，提供统一的多模型 API 网关，支持流式输出（SSE）",
+            "tech": ["Python", "FastAPI", "Ollama", "SSE", "Pydantic"],
+            "status": "已完成",
+            "repo": "https://github.com/z71271/ai-gateway"
           },
           {
             "name": "Ollama 多模型部署",
