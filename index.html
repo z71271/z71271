@@ -29,7 +29,7 @@
   <section class="hero">
     <h1 class="hero-name fade-up">郑敬耀<span class="dot">.</span></h1>
     <p class="hero-tagline fade-up">
-      <span id="typewriter" data-words='["网络工程师","IT技术销售","Linux运维","Web前端开发","AI应用开发","本地AI部署"]'></span><span class="cursor"></span>
+      <span id="typewriter" data-words='["网络工程师","IT技术销售","Linux运维","Web前端开发","AI应用开发","本地AI部署","工具链搭建者"]'></span><span class="cursor"></span>
     </p>
     <div class="hero-info fade-up">
       <span class="hero-info-item"><span class="icon-dot"></span>19129277718</span>
@@ -44,6 +44,15 @@
       <a href="/ai-resume.html" class="btn btn-ai-resume">AI简历 →</a>
       <a href="/sales.html" class="btn btn-sales">销售简历 →</a>
     </div>
+    <div class="tech-tags fade-up">
+      <span class="tag">#Python</span>
+      <span class="tag">#FastAPI</span>
+      <span class="tag">#Docker</span>
+      <span class="tag">#Ollama</span>
+      <span class="tag">#eNSP</span>
+      <span class="tag">#Linux</span>
+      <span class="tag">#AI</span>
+    </div>
     <a href="https://github.com/z71271" target="_blank" class="github-link" rel="noopener">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       GitHub
@@ -51,6 +60,43 @@
     <div class="hero-scroll">
       <span>SCROLL</span>
       <div class="hero-scroll-arrow"></div>
+    </div>
+  </section>
+
+  <section class="featured-projects">
+    <h2 class="section-title-hp">▎精选项目</h2>
+    <div class="project-grid">
+      <div class="project-card-mini">
+        <div class="card-icon">🌐</div>
+        <h3>企业网络拓扑</h3>
+        <p>基于 eNSP 的三层企业网络架构，启用 OSPF+BGP+ACL</p>
+        <span class="card-tech">OSPF · BGP · VLAN</span>
+        <a href="https://github.com/z71271/enterprise-network-lab" target="_blank" class="card-link" rel="noopener">查看 →</a>
+      </div>
+      <div class="project-card-mini">
+        <div class="card-icon">🤖</div>
+        <h3>本地 AI 网关</h3>
+        <p>FastAPI 封装的 Ollama 多模型 API 网关，支持 SSE 流式输出</p>
+        <span class="card-tech">FastAPI · Ollama · SSE</span>
+        <a href="https://github.com/z71271/ai-gateway" target="_blank" class="card-link" rel="noopener">查看 →</a>
+      </div>
+      <div class="project-card-mini">
+        <div class="card-icon">🐳</div>
+        <h3>网站容器化部署</h3>
+        <p>Dockerfile + docker-compose 一键部署个人网站</p>
+        <span class="card-tech">Docker · Nginx · Compose</span>
+        <a href="https://github.com/z71271/z71271" target="_blank" class="card-link" rel="noopener">查看 →</a>
+      </div>
+      <div class="project-card-mini">
+        <div class="card-icon">💻</div>
+        <h3>Shell 脚本合集</h3>
+        <p>服务器一键部署、日志分析、SSL 续期三大实用脚本</p>
+        <span class="card-tech">Bash · Nginx · systemd</span>
+        <a href="https://github.com/z71271/shell-scripts" target="_blank" class="card-link" rel="noopener">查看 →</a>
+      </div>
+    </div>
+    <div class="view-all">
+      <a href="/projects.html" class="btn-more">查看全部项目 →</a>
     </div>
   </section>
 </main>

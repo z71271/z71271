@@ -621,6 +621,30 @@ body.sales-page .icon-list li::before { color: var(--accent-sales); }
   justify-content: center;
 }
 
+/* 技术标签云 */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.tag {
+  padding: 5px 15px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 20px;
+  color: #00d4ff;
+  font-size: 0.8em;
+  transition: all 0.3s;
+}
+
+.tag:hover {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: #00d4ff;
+  transform: translateY(-2px);
+}
+
 /* GitHub 链接 */
 .github-link {
   display: inline-flex;
@@ -680,6 +704,103 @@ body.sales-page .icon-list li::before { color: var(--accent-sales); }
 @keyframes float {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+/* ============================================================
+   首页精选项目
+   ============================================================ */
+
+.featured-projects {
+  margin: 60px auto;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.section-title-hp {
+  color: #00d4ff;
+  font-size: 1.3em;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+  padding-bottom: 10px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.project-card-mini {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card-mini:hover {
+  border-color: rgba(0, 212, 255, 0.25);
+  transform: translateY(-4px);
+}
+
+.card-icon { font-size: 1.5em; margin-bottom: 8px; }
+
+.project-card-mini h3 {
+  color: #eaeaea;
+  font-size: 1em;
+  margin-bottom: 8px;
+}
+
+.project-card-mini p {
+  color: #888;
+  font-size: 0.8em;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.card-tech {
+  color: #00d4ff;
+  font-size: 0.7em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.card-link {
+  color: #00d4ff;
+  font-size: 0.8em;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.card-link:hover { text-decoration: underline; }
+
+.view-all {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.btn-more {
+  display: inline-block;
+  padding: 8px 24px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 4px;
+  color: #00d4ff;
+  text-decoration: none;
+  font-size: 0.85em;
+  transition: all 0.3s;
+}
+
+.btn-more:hover {
+  background: rgba(0, 212, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============================================================
