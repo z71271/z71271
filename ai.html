@@ -406,6 +406,23 @@
         html += '</ul>';
       }
 
+      if (content.achievements) {
+        html += '<ul class="plan-list">';
+        content.achievements.forEach(item => {
+          html += `<li>${item}</li>`;
+        });
+        html += '</ul>';
+      }
+
+      if (content.workflow) {
+        html += '<div style="margin-top:15px;padding:12px 16px;border-left:2px solid #00d4ff;background:rgba(0,212,255,0.04);border-radius:0 4px 4px 0;">';
+        html += '<div style="color:#00d4ff;font-size:0.75em;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">工作流程</div>';
+        content.workflow.forEach(item => {
+          html += `<div style="color:#aaa;font-size:0.85em;">${item}</div>`;
+        });
+        html += '</div>';
+      }
+
       // Mermaid 架构图
       if (content.mermaid) {
         html += '<div class="mermaid-wrapper"><pre class="mermaid">' + content.mermaid + '</pre></div>';
