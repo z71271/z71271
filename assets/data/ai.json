@@ -123,6 +123,20 @@
             "tech": ["Ollama", "Open WebUI", "Docker"],
             "status": "已完成",
             "repo": ""
+          },
+          {
+            "name": "网络设备批量配置脚本",
+            "description": "Python 脚本批量 SSH 登录网络设备执行命令，支持模拟模式零硬件依赖",
+            "tech": ["Python", "paramiko", "SSH", "socket"],
+            "status": "已完成",
+            "repo": "https://github.com/z71271/net-auto-config"
+          },
+          {
+            "name": "简易爬虫",
+            "description": "爬取技术博客和招聘信息，提取结构化数据存为 JSON/CSV",
+            "tech": ["Python", "requests", "BeautifulSoup", "CSV"],
+            "status": "已完成",
+            "repo": "https://github.com/z71271/simple-crawler"
           }
         ]
       }
