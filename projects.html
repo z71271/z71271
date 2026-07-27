@@ -83,18 +83,7 @@
             margin-bottom: 6px;
         }
 
-        .project-card .card-body .week-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 3px;
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            font-size: 0.7em;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-
-        .project-card .card-body .desc {
+.project-card .card-body .desc {
             color: #888;
             font-size: 0.85em;
             line-height: 1.6;
@@ -213,7 +202,7 @@
             <div class="card-left"><span class="card-icon">🏗️</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>企业网络拓扑设计与实现 <span class="week-badge">第4周</span></h2>
+                <h2>企业网络拓扑设计与实现</h2>
                 <div class="desc">
                     基于华为 eNSP 设计并实现中型企业三层网络架构。
                     包含 OSPF 动态路由（Area 0）、BGP 双线接入（AS 65000↔65001/65002）、
@@ -238,7 +227,7 @@
             <div class="card-left"><span class="card-icon">⚡</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>本地 AI API 网关 <span class="week-badge">第3周</span></h2>
+                <h2>本地 AI API 网关</h2>
                 <div class="desc">
                     用 FastAPI 封装 Ollama 本地大模型，提供统一的 API 网关。
                     支持多模型一键切换（qwen2.5 / llama3.1 / deepseek-r1）、
@@ -260,7 +249,7 @@
             <div class="card-left"><span class="card-icon">🤖</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>Ollama 多模型本地部署 <span class="week-badge">第2周</span></h2>
+                <h2>Ollama 多模型本地部署</h2>
                 <div class="desc">
                     在 RTX 3080（10GB VRAM）上部署了三个主流开源模型：
                     qwen2.5:7b（中文）、llama3.1:8b（英文/通用）、deepseek-r1:8b（推理）。
@@ -281,7 +270,7 @@
             <div class="card-left"><span class="card-icon">📚</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>RAG 知识库搭建 <span class="week-badge">第2周</span></h2>
+                <h2>RAG 知识库搭建</h2>
                 <div class="desc">
                     使用 AnythingLLM 桌面版搭建本地 RAG（检索增强生成）知识库，
                     连接本地 Ollama 模型。上传技术文档后可实现私有知识智能问答。
@@ -302,7 +291,7 @@
             <div class="card-left"><span class="card-icon">🎨</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>ComfyUI / Stable Diffusion 部署 <span class="week-badge">第3周</span></h2>
+                <h2>ComfyUI / Stable Diffusion 部署</h2>
                 <div class="desc">
                     在 RTX 3080 上部署 ComfyUI + Stable Diffusion（DreamShaper 8），
                     跑通文生图和图生图工作流，理解 SD 底层六大节点的工作原理。
@@ -323,7 +312,7 @@
             <div class="card-left"><span class="card-icon">🐳</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>网站容器化部署 <span class="week-badge">第1周</span></h2>
+                <h2>网站容器化部署</h2>
                 <div class="desc">
                     用 Dockerfile + docker-compose 将个人网站打包成 Nginx Alpine 镜像。
                     包含自定义 Nginx 配置（Gzip压缩、缓存策略、404页面）、
@@ -343,7 +332,7 @@
             <div class="card-left"><span class="card-icon">🔧</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>Shell 脚本合集 <span class="week-badge">第4周</span></h2>
+                <h2>Shell 脚本合集</h2>
                 <div class="desc">
                     3 个实用运维脚本：新服务器一键环境部署（Nginx/Docker/Python）、
                     Nginx 日志分析（状态码/IP/流量分布/异常探测）、
@@ -366,7 +355,7 @@
             <div class="card-left"><span class="card-icon">🌐</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>网络设备批量配置脚本 <span class="week-badge">第3周</span></h2>
+                <h2>网络设备批量配置脚本</h2>
                 <div class="desc">
                     Python + paramiko 批量 SSH 登录网络设备执行命令。
                     支持 CSV 驱动（读取设备列表和命令列表）、内置模拟设备（零硬件依赖）、
@@ -385,7 +374,7 @@
             <div class="card-left"><span class="card-icon">🕷️</span></div>
             <div class="card-body">
                 <span class="status-badge status-done">✅ 已完成</span>
-                <h2>简易爬虫合集 <span class="week-badge">第3周</span></h2>
+                <h2>简易爬虫合集</h2>
                 <div class="desc">
                     两个爬虫项目：阮一峰博客文章爬虫（requests+BeautifulSoup，输出JSON/CSV）、
                     AI岗位招聘信息爬虫（含数据分析和技能标签词频统计）。
