@@ -117,7 +117,7 @@
     <!-- 1. 文件与目录 -->
     <div class="category">
         <h2>📁 文件与目录</h2>
-        <table class="cmd-table">
+        <div class="table-wrap"><table class="cmd-table">
             <tr><th>命令</th><th>说明</th></tr>
             <tr><td><code>ls -la</code></td><td>列出所有文件（含隐藏文件）+ 详细信息</td></tr>
             <tr><td><code>cd /path</code></td><td>切换目录</td></tr>
@@ -134,13 +134,13 @@
             <tr><td><code>head -20 file</code></td><td>查看文件前20行</td></tr>
             <tr><td><code>chmod +x script.sh</code></td><td>给脚本添加执行权限</td></tr>
             <tr><td><code>chown user:group file</code></td><td>修改文件所属用户/组</td></tr>
-        </table>
+        </table></div>
     </div>
 
     <!-- 2. 进程管理 -->
     <div class="category">
         <h2>⚙️ 进程管理</h2>
-        <table class="cmd-table">
+        <div class="table-wrap"><table class="cmd-table">
             <tr><th>命令</th><th>说明</th></tr>
             <tr><td><code>ps aux</code></td><td>查看所有进程</td></tr>
             <tr><td><code>ps aux | grep nginx</code></td><td>查找 nginx 相关进程</td></tr>
@@ -151,13 +151,13 @@
             <tr><td><code>bg / fg</code></td><td>后台/前台切换任务</td></tr>
             <tr><td><code>nohup cmd &</code></td><td>后台运行，关终端不中断</td></tr>
             <tr><td><code>jobs</code></td><td>查看后台任务</td></tr>
-        </table>
+        </table></div>
     </div>
 
     <!-- 3. 网络 -->
     <div class="category">
         <h2>🌐 网络</h2>
-        <table class="cmd-table">
+        <div class="table-wrap"><table class="cmd-table">
             <tr><th>命令</th><th>说明</th></tr>
             <tr><td><code>ip addr</code></td><td>查看网络接口和IP</td></tr>
             <tr><td><code>ss -tlnp</code></td><td>查看所有监听端口</td></tr>
@@ -168,13 +168,13 @@
             <tr><td><code>ping -c 4 8.8.8.8</code></td><td>ping 4次测试连通性</td></tr>
             <tr><td><code>traceroute 8.8.8.8</code></td><td>路由追踪</td></tr>
             <tr><td><code>iptables -L -n</code></td><td>查看防火墙规则</td></tr>
-        </table>
+        </table></div>
     </div>
 
     <!-- 4. 系统服务 -->
     <div class="category">
         <h2>🔧 系统服务 (systemd)</h2>
-        <table class="cmd-table">
+        <div class="table-wrap"><table class="cmd-table">
             <tr><th>命令</th><th>说明</th></tr>
             <tr><td><code>systemctl status nginx</code></td><td>查看服务状态</td></tr>
             <tr><td><code>systemctl start/stop nginx</code></td><td>启动/停止服务</td></tr>
@@ -184,13 +184,13 @@
             <tr><td><code>systemctl daemon-reload</code></td><td>重载服务配置（改 .service 后执行）</td></tr>
             <tr><td><code>journalctl -u nginx -f</code></td><td>实时查看服务日志</td></tr>
             <tr><td><code>journalctl -u nginx --since today</code></td><td>查看今天的服务日志</td></tr>
-        </table>
+        </table></div>
     </div>
 
     <!-- 5. 包管理 -->
     <div class="category">
         <h2>📦 包管理（apt / Ubuntu）</h2>
-        <table class="cmd-table">
+        <div class="table-wrap"><table class="cmd-table">
             <tr><th>命令</th><th>说明</th></tr>
             <tr><td><code>apt update</code></td><td>更新软件源索引</td></tr>
             <tr><td><code>apt upgrade -y</code></td><td>升级所有可升级的包</td></tr>
@@ -200,13 +200,13 @@
             <tr><td><code>apt search keyword</code></td><td>搜索软件包</td></tr>
             <tr><td><code>apt list --installed</code></td><td>列出已安装的包</td></tr>
             <tr><td><code>dpkg -l | grep nginx</code></td><td>查看已装包的详细信息</td></tr>
-        </table>
+        </table></div>
     </div>
 
     <!-- 6. 权限与用户 -->
     <div class="category">
         <h2>🔐 权限与用户</h2>
-        <table class="cmd-table">
+        <div class="table-wrap"><table class="cmd-table">
             <tr><th>命令</th><th>说明</th></tr>
             <tr><td><code>sudo cmd</code></td><td>以 root 身份执行命令</td></tr>
             <tr><td><code>whoami</code></td><td>查看当前用户</td></tr>
@@ -217,13 +217,13 @@
             <tr><td><code>su - username</code></td><td>切换用户</td></tr>
             <tr><td><code>chmod 755 file</code></td><td>设置权限 rwxr-xr-x</td></tr>
             <tr><td><code>chmod 600 private.key</code></td><td>仅 owner 可读写</td></tr>
-        </table>
+        </table></div>
     </div>
 
     <!-- 7. 文本处理 -->
     <div class="category">
         <h2>📝 文本处理</h2>
-        <table class="cmd-table">
+        <div class="table-wrap"><table class="cmd-table">
             <tr><th>命令</th><th>说明</th></tr>
             <tr><td><code>grep "error" file</code></td><td>搜索包含 error 的行</td></tr>
             <tr><td><code>grep -r "TODO" .</code></td><td>递归搜索当前目录</td></tr>
@@ -233,7 +233,7 @@
             <tr><td><code>wc -l file</code></td><td>统计行数</td></tr>
             <tr><td><code>sort | uniq -c | sort -rn</code></td><td>排序去重统计（经典组合）</td></tr>
             <tr><td><code>tee file</code></td><td>同时输出到屏幕和文件</td></tr>
-        </table>
+        </table></div>
     </div>
 
     <div class="tip-box">
