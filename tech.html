@@ -20,6 +20,7 @@
       <li><a href="/ai-resume.html">AI简历</a></li>
       <li><a href="/sales.html">销售简历</a></li>
         <li><a href="/linux-cheatsheet.html">速查</a></li>
+      <li><a href="/projects.html">项目</a></li>
       <li><a href="/contact.html">联系</a></li>
     </ul>
   </div>
@@ -134,7 +135,11 @@ fetch('/assets/data/tech.json').then(r=>r.json()).then(d=>{
   }).join('');
 
   document.getElementById('projects-list').innerHTML = d.projects.map(function(p){
-    return '<div class="card fade-up" style="margin-bottom:20px;"><div class="timeline-title" style="margin-bottom:4px;">'+p.name+'</div><div class="timeline-date" style="margin-bottom:12px;">'+p.role+'</div><ul class="icon-list">'+p.items.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul></div>';
+    var items = p.items || p.highlights || [];
+    var extra = '';
+    if (p.description) extra += '<p style="color:#94a3b8;font-size:0.88em;margin-bottom:10px;">'+p.description+'</p>';
+    if (p.repo) extra += '<p style="margin-top:8px;"><a href="'+p.repo+'" target="_blank" style="color:#00d4ff;font-size:0.82em;text-decoration:none;">GitHub →</a></p>';
+    return '<div class="card fade-up" style="margin-bottom:20px;"><div class="timeline-title" style="margin-bottom:4px;">'+p.name+'</div><div class="timeline-date" style="margin-bottom:12px;">'+p.role+'</div>'+extra+'<ul class="icon-list">'+items.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul></div>';
   }).join('');
 
   // 重新触发动画

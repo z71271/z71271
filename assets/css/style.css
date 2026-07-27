@@ -1034,6 +1034,8 @@ body.sales-page .profile-photo {
 
   .hero-name { font-size: 2.4rem; }
 
+  .hero-scroll { display: none; }
+
   .card-grid-2,
   .card-grid-3,
   .card-grid-4 { grid-template-columns: 1fr; }
@@ -1086,6 +1088,8 @@ body.sales-page .profile-photo {
 /* 超小屏手机 (iPhone SE 等 375px) */
 @media (max-width: 480px) {
   html { font-size: 14px; }
+
+  .hero { min-height: auto; padding: 40px 0 60px; }
 
   .hero-name { font-size: 2rem; }
 
