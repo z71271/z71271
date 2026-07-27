@@ -93,7 +93,7 @@
           { "name": "Docker 容器化部署", "level": "掌握中" },
           { "name": "FastAPI 后端开发", "level": "学习中" },
           { "name": "RAG 知识库搭建", "level": "掌握" },
-          { "name": "ComfyUI/Stable Diffusion", "level": "规划中" }
+          { "name": "ComfyUI/Stable Diffusion", "level": "掌握" }
         ]
       }
     },
