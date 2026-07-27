@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux 命令速查 | ZJY</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <style>
+        .cheatsheet-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .cheatsheet-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .cheatsheet-header h1 {
+            font-size: 2em;
+            color: #00d4ff;
+            margin-bottom: 8px;
+        }
+
+        .cheatsheet-header .subtitle {
+            color: #888;
+            font-size: 0.85em;
+        }
+
+        .category {
+            margin-bottom: 35px;
+            padding: 0 5px;
+        }
+
+        .category h2 {
+            color: #00d4ff;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .cmd-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+
+        .cmd-table th {
+            background: rgba(0, 212, 255, 0.08);
+            color: #00d4ff;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+        }
+
+        .cmd-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #bbb;
+        }
+
+        .cmd-table code {
+            background: #1a1a2e;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #ffc800;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .cmd-table tr:hover td {
+            background: rgba(0, 212, 255, 0.02);
+        }
+
+        .tip-box {
+            padding: 12px 18px;
+            border-left: 3px solid #ffc800;
+            background: rgba(255, 200, 0, 0.05);
+            margin-top: 20px;
+            border-radius: 0 6px 6px 0;
+            color: #aaa;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body class="linux-cheatsheet-page">
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">&lt;<span>ZJY</span>/&gt;</a>
+        <button class="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="/">首页</a></li>
+            <li><a href="/tech.html">技术简历</a></li>
+            <li><a href="/ai.html">AI 能力</a></li>
+            <li><a href="/notes.html">笔记</a></li>
+            <li><a href="/ai-resume.html">AI简历</a></li>
+            <li><a href="/sales.html">销售简历</a></li>
+            <li><a href="/linux-cheatsheet.html" class="active">速查</a></li>
+            <li><a href="/contact.html">联系</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main style="padding-top: var(--nav-height);">
+<div class="cheatsheet-container">
+    <div class="cheatsheet-header">
+        <h1>Linux 命令速查表</h1>
+        <p class="subtitle">基于实际使用经验整理 — 持续更新</p>
+    </div>
+
+    <!-- 1. 文件与目录 -->
+    <div class="category">
+        <h2>📁 文件与目录</h2>
+        <table class="cmd-table">
+            <tr><th>命令</th><th>说明</th></tr>
+            <tr><td><code>ls -la</code></td><td>列出所有文件（含隐藏文件）+ 详细信息</td></tr>
+            <tr><td><code>cd /path</code></td><td>切换目录</td></tr>
+            <tr><td><code>pwd</code></td><td>显示当前目录路径</td></tr>
+            <tr><td><code>mkdir -p a/b/c</code></td><td>递归创建目录</td></tr>
+            <tr><td><code>cp -r src dest</code></td><td>递归复制目录</td></tr>
+            <tr><td><code>mv old new</code></td><td>移动/重命名文件</td></tr>
+            <tr><td><code>rm -rf dir</code></td><td>强制删除目录（慎用！）</td></tr>
+            <tr><td><code>find . -name "*.log"</code></td><td>查找 .log 文件</td></tr>
+            <tr><td><code>du -sh *</code></td><td>显示每个文件/目录大小</td></tr>
+            <tr><td><code>df -h</code></td><td>查看磁盘使用情况</td></tr>
+            <tr><td><code>cat file</code></td><td>查看文件内容</td></tr>
+            <tr><td><code>tail -f file</code></td><td>实时追踪文件末尾（看日志用）</td></tr>
+            <tr><td><code>head -20 file</code></td><td>查看文件前20行</td></tr>
+            <tr><td><code>chmod +x script.sh</code></td><td>给脚本添加执行权限</td></tr>
+            <tr><td><code>chown user:group file</code></td><td>修改文件所属用户/组</td></tr>
+        </table>
+    </div>
+
+    <!-- 2. 进程管理 -->
+    <div class="category">
+        <h2>⚙️ 进程管理</h2>
+        <table class="cmd-table">
+            <tr><th>命令</th><th>说明</th></tr>
+            <tr><td><code>ps aux</code></td><td>查看所有进程</td></tr>
+            <tr><td><code>ps aux | grep nginx</code></td><td>查找 nginx 相关进程</td></tr>
+            <tr><td><code>top</code></td><td>实时进程监控（按 q 退出）</td></tr>
+            <tr><td><code>htop</code></td><td>top 的增强版（彩色界面）</td></tr>
+            <tr><td><code>kill -9 PID</code></td><td>强制结束进程</td></tr>
+            <tr><td><code>killall nginx</code></td><td>按名称结束进程</td></tr>
+            <tr><td><code>bg / fg</code></td><td>后台/前台切换任务</td></tr>
+            <tr><td><code>nohup cmd &</code></td><td>后台运行，关终端不中断</td></tr>
+            <tr><td><code>jobs</code></td><td>查看后台任务</td></tr>
+        </table>
+    </div>
+
+    <!-- 3. 网络 -->
+    <div class="category">
+        <h2>🌐 网络</h2>
+        <table class="cmd-table">
+            <tr><th>命令</th><th>说明</th></tr>
+            <tr><td><code>ip addr</code></td><td>查看网络接口和IP</td></tr>
+            <tr><td><code>ss -tlnp</code></td><td>查看所有监听端口</td></tr>
+            <tr><td><code>ss -t state established</code></td><td>查看已建立的 TCP 连接</td></tr>
+            <tr><td><code>netstat -tlnp</code></td><td>查看监听端口（传统命令）</td></tr>
+            <tr><td><code>curl -I https://baidu.com</code></td><td>查看 HTTP 响应头</td></tr>
+            <tr><td><code>curl -X POST url -d '{}'</code></td><td>发送 POST 请求</td></tr>
+            <tr><td><code>ping -c 4 8.8.8.8</code></td><td>ping 4次测试连通性</td></tr>
+            <tr><td><code>traceroute 8.8.8.8</code></td><td>路由追踪</td></tr>
+            <tr><td><code>iptables -L -n</code></td><td>查看防火墙规则</td></tr>
+        </table>
+    </div>
+
+    <!-- 4. 系统服务 -->
+    <div class="category">
+        <h2>🔧 系统服务 (systemd)</h2>
+        <table class="cmd-table">
+            <tr><th>命令</th><th>说明</th></tr>
+            <tr><td><code>systemctl status nginx</code></td><td>查看服务状态</td></tr>
+            <tr><td><code>systemctl start/stop nginx</code></td><td>启动/停止服务</td></tr>
+            <tr><td><code>systemctl restart nginx</code></td><td>重启服务</td></tr>
+            <tr><td><code>systemctl enable nginx</code></td><td>设置开机自启</td></tr>
+            <tr><td><code>systemctl disable nginx</code></td><td>取消开机自启</td></tr>
+            <tr><td><code>systemctl daemon-reload</code></td><td>重载服务配置（改 .service 后执行）</td></tr>
+            <tr><td><code>journalctl -u nginx -f</code></td><td>实时查看服务日志</td></tr>
+            <tr><td><code>journalctl -u nginx --since today</code></td><td>查看今天的服务日志</td></tr>
+        </table>
+    </div>
+
+    <!-- 5. 包管理 -->
+    <div class="category">
+        <h2>📦 包管理（apt / Ubuntu）</h2>
+        <table class="cmd-table">
+            <tr><th>命令</th><th>说明</th></tr>
+            <tr><td><code>apt update</code></td><td>更新软件源索引</td></tr>
+            <tr><td><code>apt upgrade -y</code></td><td>升级所有可升级的包</td></tr>
+            <tr><td><code>apt install pkg</code></td><td>安装软件包</td></tr>
+            <tr><td><code>apt remove pkg</code></td><td>卸载软件包</td></tr>
+            <tr><td><code>apt purge pkg</code></td><td>彻底卸载（含配置文件）</td></tr>
+            <tr><td><code>apt search keyword</code></td><td>搜索软件包</td></tr>
+            <tr><td><code>apt list --installed</code></td><td>列出已安装的包</td></tr>
+            <tr><td><code>dpkg -l | grep nginx</code></td><td>查看已装包的详细信息</td></tr>
+        </table>
+    </div>
+
+    <!-- 6. 权限与用户 -->
+    <div class="category">
+        <h2>🔐 权限与用户</h2>
+        <table class="cmd-table">
+            <tr><th>命令</th><th>说明</th></tr>
+            <tr><td><code>sudo cmd</code></td><td>以 root 身份执行命令</td></tr>
+            <tr><td><code>whoami</code></td><td>查看当前用户</td></tr>
+            <tr><td><code>id</code></td><td>查看当前用户 UID/GID</td></tr>
+            <tr><td><code>useradd -m username</code></td><td>创建用户（含 home 目录）</td></tr>
+            <tr><td><code>passwd username</code></td><td>设置/修改用户密码</td></tr>
+            <tr><td><code>usermod -aG group user</code></td><td>将用户加入组（如 docker 组）</td></tr>
+            <tr><td><code>su - username</code></td><td>切换用户</td></tr>
+            <tr><td><code>chmod 755 file</code></td><td>设置权限 rwxr-xr-x</td></tr>
+            <tr><td><code>chmod 600 private.key</code></td><td>仅 owner 可读写</td></tr>
+        </table>
+    </div>
+
+    <!-- 7. 文本处理 -->
+    <div class="category">
+        <h2>📝 文本处理</h2>
+        <table class="cmd-table">
+            <tr><th>命令</th><th>说明</th></tr>
+            <tr><td><code>grep "error" file</code></td><td>搜索包含 error 的行</td></tr>
+            <tr><td><code>grep -r "TODO" .</code></td><td>递归搜索当前目录</td></tr>
+            <tr><td><code>grep -v "debug" file</code></td><td>排除包含 debug 的行</td></tr>
+            <tr><td><code>awk '{print $1}' file</code></td><td>打印第1列</td></tr>
+            <tr><td><code>sed 's/old/new/g' file</code></td><td>替换文本</td></tr>
+            <tr><td><code>wc -l file</code></td><td>统计行数</td></tr>
+            <tr><td><code>sort | uniq -c | sort -rn</code></td><td>排序去重统计（经典组合）</td></tr>
+            <tr><td><code>tee file</code></td><td>同时输出到屏幕和文件</td></tr>
+        </table>
+    </div>
+
+    <div class="tip-box">
+        💡 <strong>提示</strong>：这份速查表只收录了我在服务器运维中实际用过的命令。
+        不会用的命令不写——宁缺毋滥，确保每一条都能在终端里敲出来。
+    </div>
+</div>
+</main>
+</body>
+</html>
