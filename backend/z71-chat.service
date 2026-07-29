@@ -1,0 +1,17 @@
+[Unit]
+Description=ZJY AI Chat Backend
+After=network.target
+
+[Service]
+Type=simple
+User=www
+Group=www
+WorkingDirectory=/www/wwwroot/z71.z71.pw/backend
+ExecStart=/usr/bin/python3 -m uvicorn main:app --host 127.0.0.1 --port 18888
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
