@@ -543,6 +543,13 @@ body.sales-page .icon-list li::before { color: var(--accent-sales); }
 
 .form-textarea { min-height: 120px; }
 
+.char-count {
+  text-align: right;
+  font-size: 0.75em;
+  color: #888;
+  margin-top: 4px;
+}
+
 /* ============================================================
    首页特有
    ============================================================ */
@@ -912,6 +919,51 @@ body.sales-page .icon-list li::before { color: var(--accent-sales); }
 
 .admin-field {
   margin-bottom: 18px;
+}
+
+/* 留言卡片 */
+.msg-card {
+  position: relative;
+}
+
+.msg-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.msg-card-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.msg-card-body {
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.7;
+}
+
+.msg-delete-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 10px;
+  border: 1px solid rgba(255,100,100,0.3);
+  border-radius: 4px;
+  background: rgba(255,100,100,0.08);
+  color: #ff6b6b;
+  font-size: 0.72em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.msg-delete-btn:hover {
+  background: rgba(255,100,100,0.2);
+  border-color: rgba(255,100,100,0.6);
 }
 
 .admin-field label {

@@ -89,9 +89,31 @@ document.addEventListener('DOMContentLoaded', () => {
   // 联系表单
   const form = document.getElementById('contact-form');
   if (form) {
+    // 字数计数
+    const msgTextarea = document.getElementById('message');
+    const charCount = document.getElementById('char-count');
+    if (msgTextarea && charCount) {
+      // 初始化
+      charCount.textContent = msgTextarea.value.length;
+      msgTextarea.addEventListener('input', function () {
+        var len = this.value.length;
+        charCount.textContent = len;
+        charCount.style.color = len > 180 ? '#ff6b6b' : len > 150 ? '#ffc800' : '#888';
+      });
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = form.querySelector('button');
+
+      // 前端长度校验
+      if (msgTextarea && msgTextarea.value.trim().length > 200) {
+        btn.textContent = '留言不能超过200字';
+        btn.style.background = '#dc2626';
+        setTimeout(() => { btn.textContent = '发送留言'; btn.disabled = false; btn.style.background = ''; }, 2000);
+        return;
+      }
+
       btn.disabled = true;
       btn.textContent = '发送中...';
       try {
@@ -99,19 +121,23 @@ document.addEventListener('DOMContentLoaded', () => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: form.name.value,
-            email: form.email.value,
-            message: form.message.value
+            name: form.querySelector('#name').value.trim(),
+            email: form.querySelector('#email').value.trim(),
+            message: msgTextarea ? msgTextarea.value.trim() : ''
           })
         });
+        const data = await res.json();
         if (res.ok) {
           btn.textContent = '已发送';
           btn.style.background = '#059669';
           form.reset();
+          if (charCount) charCount.textContent = '0';
           setTimeout(() => { btn.textContent = '发送留言'; btn.disabled = false; btn.style.background = ''; }, 2000);
         } else {
-          btn.textContent = '发送失败，重试';
+          btn.textContent = data.error || '发送失败，重试';
+          btn.style.background = '#dc2626';
           btn.disabled = false;
+          setTimeout(() => { btn.textContent = '发送留言'; btn.style.background = ''; }, 2500);
         }
       } catch (err) {
         btn.textContent = '网络错误，重试';
